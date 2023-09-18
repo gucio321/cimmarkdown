@@ -1590,7 +1590,7 @@ function M.Parser()
 				end
 			elseif it.re_name == "enum_re" then
 				--local enumname, enumbody = it.item:match"^%s*enum%s+([^%s;{}]+)[%s\n\r]*(%b{})"
-				local enumname = it.item:match"^%s*enum%s+([^%s;{}]+)"
+				local enumname = it.item:match"^%s*enum%s+c?l?a?s?s?%s*([^%s;{}]+)"
 				if enumname then
 					--if it's an enum with int type changed
 					if self.structs_and_enums_table.enumtypes[enumname] then

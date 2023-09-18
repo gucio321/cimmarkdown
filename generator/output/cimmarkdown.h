@@ -50,7 +50,7 @@ typedef enum {
          UNORDERED_LIST,
          LINK,
          EMPHASIS,
-    }class;
+    }MarkdownFormatType;
 typedef struct MarkdownFormatInfo MarkdownFormatInfo;
 struct MarkdownFormatInfo
 {
@@ -144,7 +144,7 @@ typedef ImGui::MarkdownLinkCallbackData MarkdownLinkCallbackData;
 typedef ImGui::MarkdownTooltipCallbackData MarkdownTooltipCallbackData;
 typedef ImGui::TextBlock TextBlock;
 typedef ImGui::TextRegion TextRegion;
-typedef ImGui::class class;
+typedef ImGui::MarkdownFormatType MarkdownFormatType;
 #endif //CIMGUI_DEFINE_ENUMS_AND_STRUCTS
 CIMGUI_API typedef void igMarkdownLinkCallback(MarkdownLinkCallbackData data);
 CIMGUI_API typedef void igMarkdownTooltipCallback(MarkdownTooltipCallbackData data);
