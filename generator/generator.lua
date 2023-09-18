@@ -163,7 +163,7 @@ local function custom_implementation(outtab,def)
 		end
 	end
 	call_args = call_args:sub(1,-2)..")"
-	table.insert(outtab,"    ImPlot::"..def.funcname..call_args..";\n")
+	table.insert(outtab,"    ImGui::"..def.funcname..call_args..";\n")
     table.insert(outtab,"}\n")
 	return true
 end
@@ -217,6 +217,7 @@ save_data("./output/overloads.txt",parser1.overloadstxt)
 cimgui_generation(parser1,modulename)
 save_data("./output/definitions.lua",serializeTableF(parser1.defsT))
 local structs_and_enums_table = parser1.structs_and_enums_table
+print(structs_and_enums_table)
 save_data("./output/structs_and_enums.lua",serializeTableF(structs_and_enums_table))
 save_data("./output/typedefs_dict.lua",serializeTableF(parser1.typedefs_dict))
 

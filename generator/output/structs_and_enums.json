@@ -44,7 +44,7 @@
         "value": "3"
       }
     ],
-    "class": [
+    "MarkdownFormatType": [
       {
         "calc_value": 0,
         "name": "NORMAL_TEXT",
@@ -81,13 +81,13 @@
     "LinkState": "imgui_markdown:434",
     "MarkdownConfig": "imgui_markdown:315",
     "MarkdownFormatInfo": "imgui_markdown:277",
+    "MarkdownFormatType": "imgui_markdown:268",
     "MarkdownHeadingFormat": "imgui_markdown:305",
     "MarkdownImageData": "imgui_markdown:256",
     "MarkdownLinkCallbackData": "imgui_markdown:240",
     "MarkdownTooltipCallbackData": "imgui_markdown:250",
     "TextBlock": "imgui_markdown:424",
-    "TextRegion": "imgui_markdown:343",
-    "class": "imgui_markdown:268"
+    "TextRegion": "imgui_markdown:343"
   },
   "structs": {
     "Emphasis": [

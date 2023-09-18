@@ -1742,7 +1742,7 @@ function M.Parser()
 	end
 	local unnamed_enum_counter = 0
 	local function enums_for_table(it, outtab, enumsordered)
-		local enumname = it.item:match"^%s*enum%s+([^%s;{}]+)"
+		local enumname = it.item:match"^%s*enum%s+c?l?a?s?s?%s*([^%s;{}]+)"
 		if not enumname then
 			unnamed_enum_counter = unnamed_enum_counter + 1
 			enumname = "unnamed"..unnamed_enum_counter
@@ -1879,7 +1879,6 @@ function M.Parser()
 		end
 		--first calc_value in enums
 		for i,enumname in ipairs(enumsordered) do
-		--for enumname,enum in pairs(outtab.enums) do
 			local enum = outtab.enums[enumname]
 			for i,t in ipairs(enum) do
 				t.calc_value = parse_enum_value(t.value,allenums)
