@@ -98,7 +98,6 @@ local function cimgui_generation(parser,name)
 	local outpre,outpost = parser.structs_and_enums[1], parser.structs_and_enums[2]
 
 	cpp2ffi.prtable(parser.templates)
-	cpp2ffi.prtable(parser.typenames)
 
 	local tdt = parser:generate_templates()
 
@@ -172,10 +171,7 @@ local function parseImGuiHeader(header,names)
 	--prepare parser
 	local parser = cpp2ffi.Parser()
 	parser.getCname = function(stname,funcname,namespace)
-		--local pre = (stname == "") and "ImPlot_" or stname.."_"
-		--local pre = (stname == "") and (namespace and (namespace=="ImGui" and "ig" or namespace.."_") or "ig") or stname.."_"
-		local pre = (stname == "") and (namespace and (namespace=="ImGui" and "ig" or namespace.."_") or "Markdown_") or stname.."_"
-		return pre..funcname
+		return funcname
 	end
 	parser.cname_overloads = cimgui_overloads
 	parser.manuals = cimgui_manuals
