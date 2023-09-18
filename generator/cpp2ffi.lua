@@ -1256,7 +1256,7 @@ function M.Parser()
 						self.typedefs_dict[key] = linet
 					else
 						--try function typedef
-						key = line:match("%(([%w_]+)%)%([^%(%)]*%)")
+						key = line:match("%(-([%w_]+)%)-%([^%(%)]*%)")
 						if key then
 							local linet = line
 							linet = linet:gsub("typedef ","")
