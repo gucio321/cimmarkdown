@@ -1,0 +1,10 @@
+----------------overloadings---------------------------
+igMarkdown	2
+1	void	igMarkdown_Nil (const char*,size_t,const MarkdownConfig)
+igRenderLine	2
+1	void	igRenderLine_Nil (const char*,Line*,TextRegion*,const MarkdownConfig)
+igUnderLine	2
+1	void	igUnderLine_Nil (ImColor)
+igdefaultMarkdownFormatCallback	2
+1	void	igdefaultMarkdownFormatCallback_Nil (const MarkdownFormatInfo,bool)
+8 overloaded

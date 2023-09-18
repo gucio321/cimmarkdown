@@ -1,0 +1,597 @@
+{
+  "TextBlock_size": [
+    {
+      "args": "(TextBlock* self)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextBlock*"
+        }
+      ],
+      "argsoriginal": "()",
+      "call_args": "()",
+      "cimguiname": "TextBlock_size",
+      "defaults": {},
+      "funcname": "size",
+      "location": "imgui_markdown:427",
+      "ov_cimguiname": "TextBlock_size",
+      "ret": "int",
+      "signature": "()const",
+      "stname": "TextBlock"
+    }
+  ],
+  "TextRegion_RenderLinkText": [
+    {
+      "args": "(TextRegion* self,const char* text_,const char* text_end_,const Link link_,const char* markdown_,const MarkdownConfig mdConfig_,const char** linkHoverStart_)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        },
+        {
+          "name": "text_",
+          "type": "const char*"
+        },
+        {
+          "name": "text_end_",
+          "type": "const char*"
+        },
+        {
+          "name": "link_",
+          "type": "const Link"
+        },
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        },
+        {
+          "name": "linkHoverStart_",
+          "type": "const char**"
+        }
+      ],
+      "argsoriginal": "(const char* text_,const char* text_end_,const Link& link_,const char* markdown_,const MarkdownConfig& mdConfig_,const char** linkHoverStart_)",
+      "call_args": "(text_,text_end_,link_,markdown_,mdConfig_,linkHoverStart_)",
+      "cimguiname": "TextRegion_RenderLinkText",
+      "defaults": {},
+      "funcname": "RenderLinkText",
+      "location": "imgui_markdown:391",
+      "ov_cimguiname": "TextRegion_RenderLinkText",
+      "ret": "bool",
+      "signature": "(const char*,const char*,const Link,const char*,const MarkdownConfig,const char**)",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_RenderLinkTextWrapped": [
+    {
+      "args": "(TextRegion* self,const char* text_,const char* text_end_,const Link link_,const char* markdown_,const MarkdownConfig mdConfig_,const char** linkHoverStart_,bool bIndentToHere_)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        },
+        {
+          "name": "text_",
+          "type": "const char*"
+        },
+        {
+          "name": "text_end_",
+          "type": "const char*"
+        },
+        {
+          "name": "link_",
+          "type": "const Link"
+        },
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        },
+        {
+          "name": "linkHoverStart_",
+          "type": "const char**"
+        },
+        {
+          "name": "bIndentToHere_",
+          "type": "bool"
+        }
+      ],
+      "argsoriginal": "(const char* text_,const char* text_end_,const Link& link_,const char* markdown_,const MarkdownConfig& mdConfig_,const char** linkHoverStart_,bool bIndentToHere_=false)",
+      "call_args": "(text_,text_end_,link_,markdown_,mdConfig_,linkHoverStart_,bIndentToHere_)",
+      "cimguiname": "TextRegion_RenderLinkTextWrapped",
+      "defaults": {
+        "bIndentToHere_": "false"
+      },
+      "funcname": "RenderLinkTextWrapped",
+      "location": "imgui_markdown:394",
+      "ov_cimguiname": "TextRegion_RenderLinkTextWrapped",
+      "ret": "void",
+      "signature": "(const char*,const char*,const Link,const char*,const MarkdownConfig,const char**,bool)",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_RenderListTextWrapped": [
+    {
+      "args": "(TextRegion* self,const char* text_,const char* text_end_)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        },
+        {
+          "name": "text_",
+          "type": "const char*"
+        },
+        {
+          "name": "text_end_",
+          "type": "const char*"
+        }
+      ],
+      "argsoriginal": "(const char* text_,const char* text_end_)",
+      "call_args": "(text_,text_end_)",
+      "cimguiname": "TextRegion_RenderListTextWrapped",
+      "defaults": {},
+      "funcname": "RenderListTextWrapped",
+      "location": "imgui_markdown:384",
+      "ov_cimguiname": "TextRegion_RenderListTextWrapped",
+      "ret": "void",
+      "signature": "(const char*,const char*)",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_RenderTextWrapped": [
+    {
+      "args": "(TextRegion* self,const char* text_,const char* text_end_,bool bIndentToHere_)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        },
+        {
+          "name": "text_",
+          "type": "const char*"
+        },
+        {
+          "name": "text_end_",
+          "type": "const char*"
+        },
+        {
+          "name": "bIndentToHere_",
+          "type": "bool"
+        }
+      ],
+      "argsoriginal": "(const char* text_,const char* text_end_,bool bIndentToHere_=false)",
+      "call_args": "(text_,text_end_,bIndentToHere_)",
+      "cimguiname": "TextRegion_RenderTextWrapped",
+      "defaults": {
+        "bIndentToHere_": "false"
+      },
+      "funcname": "RenderTextWrapped",
+      "location": "imgui_markdown:355",
+      "ov_cimguiname": "TextRegion_RenderTextWrapped",
+      "ret": "void",
+      "signature": "(const char*,const char*,bool)",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_ResetIndent": [
+    {
+      "args": "(TextRegion* self)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        }
+      ],
+      "argsoriginal": "()",
+      "call_args": "()",
+      "cimguiname": "TextRegion_ResetIndent",
+      "defaults": {},
+      "funcname": "ResetIndent",
+      "location": "imgui_markdown:397",
+      "ov_cimguiname": "TextRegion_ResetIndent",
+      "ret": "void",
+      "signature": "()",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_TextRegion": [
+    {
+      "args": "()",
+      "argsT": [],
+      "argsoriginal": "()",
+      "call_args": "()",
+      "cimguiname": "TextRegion_TextRegion",
+      "constructor": true,
+      "defaults": {},
+      "funcname": "TextRegion",
+      "location": "imgui_markdown:345",
+      "ov_cimguiname": "TextRegion_TextRegion",
+      "signature": "()",
+      "stname": "TextRegion"
+    }
+  ],
+  "TextRegion_destroy": [
+    {
+      "args": "(TextRegion* self)",
+      "argsT": [
+        {
+          "name": "self",
+          "type": "TextRegion*"
+        }
+      ],
+      "call_args": "(self)",
+      "cimguiname": "TextRegion_destroy",
+      "defaults": {},
+      "destructor": true,
+      "location": "imgui_markdown:348",
+      "ov_cimguiname": "TextRegion_destroy",
+      "realdestructor": true,
+      "ret": "void",
+      "signature": "(TextRegion*)",
+      "stname": "TextRegion"
+    }
+  ],
+  "igIsCharInsideWord": [
+    {
+      "args": "(char c_)",
+      "argsT": [
+        {
+          "name": "c_",
+          "type": "char"
+        }
+      ],
+      "argsoriginal": "(char c_)",
+      "call_args": "(c_)",
+      "cimguiname": "igIsCharInsideWord",
+      "defaults": {},
+      "funcname": "IsCharInsideWord",
+      "location": "imgui_markdown:867",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igIsCharInsideWord",
+      "ret": "bool",
+      "signature": "(char)",
+      "stname": ""
+    }
+  ],
+  "igMarkdown": [
+    {
+      "args": "(const char* markdown_,size_t markdownLength_,const MarkdownConfig mdConfig_)",
+      "argsT": [
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "markdownLength_",
+          "type": "size_t"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        }
+      ],
+      "argsoriginal": "(const char* markdown_,size_t markdownLength_,const MarkdownConfig& mdConfig_)",
+      "call_args": "(markdown_,markdownLength_,mdConfig_)",
+      "cimguiname": "igMarkdown",
+      "defaults": {},
+      "funcname": "Markdown",
+      "location": "imgui_markdown:332",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdown_Nil",
+      "ret": "void",
+      "signature": "(const char*,size_t,const MarkdownConfig)",
+      "stname": ""
+    },
+    {
+      "args": "(const char* markdown_,size_t markdownLength_,const MarkdownConfig mdConfig_)",
+      "argsT": [
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "markdownLength_",
+          "type": "size_t"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        }
+      ],
+      "argsoriginal": "(const char* markdown_,size_t markdownLength_,const MarkdownConfig& mdConfig_)",
+      "call_args": "(markdown_,markdownLength_,mdConfig_)",
+      "cimguiname": "igMarkdown",
+      "defaults": {},
+      "funcname": "Markdown",
+      "location": "imgui_markdown:525",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdown_Nil",
+      "ret": "void",
+      "signature": "(const char*,size_t,const MarkdownConfig)",
+      "stname": ""
+    }
+  ],
+  "igMarkdownFormalCallback": [
+    {
+      "args": "(const MarkdownFormatInfo markdownFormatInfo_,bool start_)",
+      "argsT": [
+        {
+          "name": "markdownFormatInfo_",
+          "type": "const MarkdownFormatInfo"
+        },
+        {
+          "name": "start_",
+          "type": "bool"
+        }
+      ],
+      "argsoriginal": "(const MarkdownFormatInfo& markdownFormatInfo_,bool start_)",
+      "call_args": "(markdownFormatInfo_,start_)",
+      "cimguiname": "igMarkdownFormalCallback",
+      "defaults": {},
+      "funcname": "MarkdownFormalCallback",
+      "location": "imgui_markdown:301",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdownFormalCallback",
+      "ret": "typedef void",
+      "signature": "(const MarkdownFormatInfo,bool)",
+      "stname": ""
+    }
+  ],
+  "igMarkdownImageCallback": [
+    {
+      "args": "(MarkdownLinkCallbackData data)",
+      "argsT": [
+        {
+          "name": "data",
+          "type": "MarkdownLinkCallbackData"
+        }
+      ],
+      "argsoriginal": "(MarkdownLinkCallbackData data)",
+      "call_args": "(data)",
+      "cimguiname": "igMarkdownImageCallback",
+      "defaults": {},
+      "funcname": "MarkdownImageCallback",
+      "location": "imgui_markdown:300",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdownImageCallback",
+      "ret": "typedef MarkdownImageData",
+      "signature": "(MarkdownLinkCallbackData)",
+      "stname": ""
+    }
+  ],
+  "igMarkdownLinkCallback": [
+    {
+      "args": "(MarkdownLinkCallbackData data)",
+      "argsT": [
+        {
+          "name": "data",
+          "type": "MarkdownLinkCallbackData"
+        }
+      ],
+      "argsoriginal": "(MarkdownLinkCallbackData data)",
+      "call_args": "(data)",
+      "cimguiname": "igMarkdownLinkCallback",
+      "defaults": {},
+      "funcname": "MarkdownLinkCallback",
+      "location": "imgui_markdown:285",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdownLinkCallback",
+      "ret": "typedef void",
+      "signature": "(MarkdownLinkCallbackData)",
+      "stname": ""
+    }
+  ],
+  "igMarkdownTooltipCallback": [
+    {
+      "args": "(MarkdownTooltipCallbackData data)",
+      "argsT": [
+        {
+          "name": "data",
+          "type": "MarkdownTooltipCallbackData"
+        }
+      ],
+      "argsoriginal": "(MarkdownTooltipCallbackData data)",
+      "call_args": "(data)",
+      "cimguiname": "igMarkdownTooltipCallback",
+      "defaults": {},
+      "funcname": "MarkdownTooltipCallback",
+      "location": "imgui_markdown:286",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igMarkdownTooltipCallback",
+      "ret": "typedef void",
+      "signature": "(MarkdownTooltipCallbackData)",
+      "stname": ""
+    }
+  ],
+  "igRenderLine": [
+    {
+      "args": "(const char* markdown_,Line* line_,TextRegion* textRegion_,const MarkdownConfig mdConfig_)",
+      "argsT": [
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "line_",
+          "reftoptr": true,
+          "type": "Line*"
+        },
+        {
+          "name": "textRegion_",
+          "reftoptr": true,
+          "type": "TextRegion*"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        }
+      ],
+      "argsoriginal": "(const char* markdown_,Line& line_,TextRegion& textRegion_,const MarkdownConfig& mdConfig_)",
+      "call_args": "(markdown_,*line_,*textRegion_,mdConfig_)",
+      "cimguiname": "igRenderLine",
+      "defaults": {},
+      "funcname": "RenderLine",
+      "location": "imgui_markdown:341",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igRenderLine_Nil",
+      "ret": "void",
+      "signature": "(const char*,Line*,TextRegion*,const MarkdownConfig)",
+      "stname": ""
+    },
+    {
+      "args": "(const char* markdown_,Line* line_,TextRegion* textRegion_,const MarkdownConfig mdConfig_)",
+      "argsT": [
+        {
+          "name": "markdown_",
+          "type": "const char*"
+        },
+        {
+          "name": "line_",
+          "reftoptr": true,
+          "type": "Line*"
+        },
+        {
+          "name": "textRegion_",
+          "reftoptr": true,
+          "type": "TextRegion*"
+        },
+        {
+          "name": "mdConfig_",
+          "type": "const MarkdownConfig"
+        }
+      ],
+      "argsoriginal": "(const char* markdown_,Line& line_,TextRegion& textRegion_,const MarkdownConfig& mdConfig_)",
+      "call_args": "(markdown_,*line_,*textRegion_,mdConfig_)",
+      "cimguiname": "igRenderLine",
+      "defaults": {},
+      "funcname": "RenderLine",
+      "location": "imgui_markdown:467",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igRenderLine_Nil",
+      "ret": "void",
+      "signature": "(const char*,Line*,TextRegion*,const MarkdownConfig)",
+      "stname": ""
+    }
+  ],
+  "igUnderLine": [
+    {
+      "args": "(ImColor col_)",
+      "argsT": [
+        {
+          "name": "col_",
+          "type": "ImColor"
+        }
+      ],
+      "argsoriginal": "(ImColor col_)",
+      "call_args": "(col_)",
+      "cimguiname": "igUnderLine",
+      "defaults": {},
+      "funcname": "UnderLine",
+      "location": "imgui_markdown:340",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igUnderLine_Nil",
+      "ret": "void",
+      "signature": "(ImColor)",
+      "stname": ""
+    },
+    {
+      "args": "(ImColor col_)",
+      "argsT": [
+        {
+          "name": "col_",
+          "type": "ImColor"
+        }
+      ],
+      "argsoriginal": "(ImColor col_)",
+      "call_args": "(col_)",
+      "cimguiname": "igUnderLine",
+      "defaults": {},
+      "funcname": "UnderLine",
+      "location": "imgui_markdown:459",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igUnderLine_Nil",
+      "ret": "void",
+      "signature": "(ImColor)",
+      "stname": ""
+    }
+  ],
+  "igdefaultMarkdownFormatCallback": [
+    {
+      "args": "(const MarkdownFormatInfo markdownFormatInfo_,bool start_)",
+      "argsT": [
+        {
+          "name": "markdownFormatInfo_",
+          "type": "const MarkdownFormatInfo"
+        },
+        {
+          "name": "start_",
+          "type": "bool"
+        }
+      ],
+      "argsoriginal": "(const MarkdownFormatInfo& markdownFormatInfo_,bool start_)",
+      "call_args": "(markdownFormatInfo_,start_)",
+      "cimguiname": "igdefaultMarkdownFormatCallback",
+      "defaults": {},
+      "funcname": "defaultMarkdownFormatCallback",
+      "location": "imgui_markdown:303",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igdefaultMarkdownFormatCallback_Nil",
+      "ret": "void",
+      "signature": "(const MarkdownFormatInfo,bool)",
+      "stname": ""
+    },
+    {
+      "args": "(const MarkdownFormatInfo markdownFormatInfo_,bool start_)",
+      "argsT": [
+        {
+          "name": "markdownFormatInfo_",
+          "type": "const MarkdownFormatInfo"
+        },
+        {
+          "name": "start_",
+          "type": "bool"
+        }
+      ],
+      "argsoriginal": "(const MarkdownFormatInfo& markdownFormatInfo_,bool start_)",
+      "call_args": "(markdownFormatInfo_,start_)",
+      "cimguiname": "igdefaultMarkdownFormatCallback",
+      "defaults": {},
+      "funcname": "defaultMarkdownFormatCallback",
+      "location": "imgui_markdown:927",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igdefaultMarkdownFormatCallback_Nil",
+      "ret": "void",
+      "signature": "(const MarkdownFormatInfo,bool)",
+      "stname": ""
+    }
+  ],
+  "igdefaultMarkdownTooltipCallback": [
+    {
+      "args": "(MarkdownTooltipCallbackData data_)",
+      "argsT": [
+        {
+          "name": "data_",
+          "type": "MarkdownTooltipCallbackData"
+        }
+      ],
+      "argsoriginal": "(MarkdownTooltipCallbackData data_)",
+      "call_args": "(data_)",
+      "cimguiname": "igdefaultMarkdownTooltipCallback",
+      "defaults": {},
+      "funcname": "defaultMarkdownTooltipCallback",
+      "location": "imgui_markdown:288",
+      "namespace": "ImGui",
+      "ov_cimguiname": "igdefaultMarkdownTooltipCallback",
+      "ret": "void",
+      "signature": "(MarkdownTooltipCallbackData)",
+      "stname": ""
+    }
+  ]
+}

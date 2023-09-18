@@ -1,0 +1,13 @@
+{
+  "Emphasis": "struct Emphasis",
+  "Line": "struct Line",
+  "Link": "struct Link",
+  "MarkdownConfig": "struct MarkdownConfig",
+  "MarkdownFormatInfo": "struct MarkdownFormatInfo",
+  "MarkdownHeadingFormat": "struct MarkdownHeadingFormat",
+  "MarkdownImageData": "struct MarkdownImageData",
+  "MarkdownLinkCallbackData": "struct MarkdownLinkCallbackData",
+  "MarkdownTooltipCallbackData": "struct MarkdownTooltipCallbackData",
+  "TextBlock": "struct TextBlock",
+  "TextRegion": "struct TextRegion"
+}
