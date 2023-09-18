@@ -4,8 +4,6 @@
 #include "./imgui_markdown/imgui_markdown.h"
 #include "cimmarkdown.h"
 
-//ImPlotPoint getters manually wrapped for taking getters modifying ImPlotPoint*
-
 CIMGUI_API typedef void MarkdownLinkCallback(MarkdownLinkCallbackData data)
 {
     return ImGui::MarkdownLinkCallback(data);

@@ -1,5 +1,5 @@
-#ifndef CIMGUIPLOT_INCLUDED
-#define CIMGUIPLOT_INCLUDED
+#ifndef CIMMARKDOWN_INCLUDED
+#define CIMMARKDOWN_INCLUDED
 
 #include "cimgui.h"
 
@@ -15,7 +15,7 @@ typedef struct tm tm;
 #include "auto_funcs.h"
 
 
-#endif //CIMGUIPLOT_INCLUDED
+#endif //CIMMARKDOWN_INCLUDED
 
 
 
