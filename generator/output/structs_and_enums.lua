@@ -230,8 +230,5 @@ defs["structs"]["TextBlock"][2] = {}
 defs["structs"]["TextBlock"][2]["name"] = "stop"
 defs["structs"]["TextBlock"][2]["type"] = "int"
 defs["structs"]["TextRegion"] = {}
-defs["structs"]["TextRegion"][1] = {}
-defs["structs"]["TextRegion"][1]["name"] = "indentX"
-defs["structs"]["TextRegion"][1]["type"] = "float"
 
 return defs

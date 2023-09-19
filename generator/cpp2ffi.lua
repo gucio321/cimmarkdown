@@ -1636,6 +1636,8 @@ function M.Parser()
 					self.typedefs_dict[structname]="struct "..structname
 					--dont insert child structs as they are inserted before parent struct
 					if not (it.parent and it.parent.re_name == "struct_re") then
+						--cleanst may have "private:" section. Remove everything (ofc excluding braces) after this section
+						cleanst = cleanst:gsub("%s*private:.-}","}")
 						table.insert(outtab,predec .. cleanst)
 					end
 				end
@@ -1710,8 +1712,8 @@ function M.Parser()
 		else
 			--split type name1,name2; in several lines
 			local typen,rest = line:match("%s*([^,]+)%s(%S+[,;])")
-			-- trim private: prefix from typen if applies
-			typen = typen:gsub("^private:","")
+			--if typen has "private:" prefix, just skip this
+			if typen:match"private:" then return end
 			--print(typen,"rest:",rest)
             if not typen then -- Lets try Type*name
                 typen,rest = line:match("([^,]+%*)(%S+[,;])")

@@ -79,10 +79,7 @@ struct MarkdownConfig
     struct TextRegion;
     struct Line;
 struct TextRegion
-{
-    private:
-        float indentX;
-};
+{};
 struct Line
 {
         bool isHeading;
