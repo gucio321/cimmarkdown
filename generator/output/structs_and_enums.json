@@ -309,7 +309,7 @@
     "TextRegion": [
       {
         "name": "indentX",
-        "type": "private:float"
+        "type": "float"
       }
     ]
   }

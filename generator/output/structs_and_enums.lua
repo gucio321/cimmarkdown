@@ -232,6 +232,6 @@ defs["structs"]["TextBlock"][2]["type"] = "int"
 defs["structs"]["TextRegion"] = {}
 defs["structs"]["TextRegion"][1] = {}
 defs["structs"]["TextRegion"][1]["name"] = "indentX"
-defs["structs"]["TextRegion"][1]["type"] = "private:float"
+defs["structs"]["TextRegion"][1]["type"] = "float"
 
 return defs

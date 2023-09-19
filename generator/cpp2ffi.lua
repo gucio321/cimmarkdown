@@ -1710,6 +1710,8 @@ function M.Parser()
 		else
 			--split type name1,name2; in several lines
 			local typen,rest = line:match("%s*([^,]+)%s(%S+[,;])")
+			-- trim private: prefix from typen if applies
+			typen = typen:gsub("^private:","")
 			--print(typen,"rest:",rest)
             if not typen then -- Lets try Type*name
                 typen,rest = line:match("([^,]+%*)(%S+[,;])")
