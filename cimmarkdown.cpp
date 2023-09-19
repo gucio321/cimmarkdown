@@ -24,22 +24,6 @@ CIMGUI_API typedef void MarkdownFormalCallback(const MarkdownFormatInfo markdown
 {
     return ImGui::MarkdownFormalCallback(markdownFormatInfo_,start_);
 }
-CIMGUI_API void defaultMarkdownFormatCallback_Nil(const MarkdownFormatInfo markdownFormatInfo_,bool start_)
-{
-    return ImGui::defaultMarkdownFormatCallback(markdownFormatInfo_,start_);
-}
-CIMGUI_API void Markdown_Nil(const char* markdown_,size_t markdownLength_,const MarkdownConfig mdConfig_)
-{
-    return ImGui::Markdown(markdown_,markdownLength_,mdConfig_);
-}
-CIMGUI_API void UnderLine_Nil(ImColor col_)
-{
-    return ImGui::UnderLine(col_);
-}
-CIMGUI_API void RenderLine_Nil(const char* markdown_,Line* line_,TextRegion* textRegion_,const MarkdownConfig mdConfig_)
-{
-    return ImGui::RenderLine(markdown_,*line_,*textRegion_,mdConfig_);
-}
 CIMGUI_API TextRegion* TextRegion(void)
 {
     return IM_NEW(TextRegion)();

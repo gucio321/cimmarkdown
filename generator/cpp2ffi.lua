@@ -2434,7 +2434,6 @@ local function func_header_generate_funcs(FP)
     local outtab = {}
    
     for _,t in ipairs(FP.funcdefs) do
-
         if t.cimguiname then
         local cimf = FP.defsT[t.cimguiname]
         local def = cimf[t.signature]
@@ -2476,7 +2475,26 @@ local function func_header_generate(FP)
     local outtab = func_header_generate_structs(FP)
     table.insert(outtab, 1, "#ifndef CIMGUI_DEFINE_ENUMS_AND_STRUCTS\n")
     table.insert(outtab,"#endif //CIMGUI_DEFINE_ENUMS_AND_STRUCTS\n")
-    
+
+	-- check and remove duplicates in FP.funcdefs
+	local newFuncdefs = {}
+	for i,v in ipairs(FP.funcdefs) do
+		local isDup = false
+		for j=i+1,#FP.funcdefs do
+			if v.cimguiname == FP.funcdefs[j].cimguiname and v.signature == FP.funcdefs[j].signature then
+				print("duplicate",v.cimguiname,v.signature)
+				isDup = true
+				break
+			end
+		end
+
+		if not isDup then
+			table.insert(newFuncdefs, v)
+		end
+	end
+
+	FP.funcdefs = newFuncdefs
+
     local outtabf = func_header_generate_funcs(FP)
     
     local cfuncsstr = table.concat(outtab)..table.concat(outtabf)
