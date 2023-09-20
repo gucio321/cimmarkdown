@@ -151,7 +151,7 @@ CIMGUI_API typedef void MarkdownTooltipCallback(MarkdownTooltipCallbackData data
 CIMGUI_API void defaultMarkdownTooltipCallback(MarkdownTooltipCallbackData data_);
 CIMGUI_API typedef MarkdownImageData MarkdownImageCallback(MarkdownLinkCallbackData data);
 CIMGUI_API typedef void MarkdownFormalCallback(const MarkdownFormatInfo markdownFormatInfo_,bool start_);
-CIMGUI_API TextRegion* TextRegion(void);
+CIMGUI_API TextRegion* NewTextRegion(void);
 CIMGUI_API void TextRegion_destroy(TextRegion* self);
 CIMGUI_API void RenderTextWrapped(TextRegion* self,const char* text_,const char* text_end_,bool bIndentToHere_);
 CIMGUI_API void RenderListTextWrapped(TextRegion* self,const char* text_,const char* text_end_);

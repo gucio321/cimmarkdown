@@ -24,7 +24,7 @@ CIMGUI_API typedef void MarkdownFormalCallback(const MarkdownFormatInfo markdown
 {
     return ImGui::MarkdownFormalCallback(markdownFormatInfo_,start_);
 }
-CIMGUI_API TextRegion* TextRegion(void)
+CIMGUI_API TextRegion* NewTextRegion(void)
 {
     return IM_NEW(TextRegion)();
 }
