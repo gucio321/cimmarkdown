@@ -601,7 +601,7 @@ local function clean_names_from_signature(self,signat)
 	return result
 end
 local function clean_functypedef(line)
-	local first, args = line:match("(typedef .-%(%*[_%w]+%))%s*(%b())")
+	local first, args = line:match("(typedef .-%(-%*-[_%w]+%)-)%s*(%b())")
 
 	if not args then
 		print"not getting args in"

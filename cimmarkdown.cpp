@@ -4,25 +4,9 @@
 #include "cimmarkdown.h"
 #include "./imgui_markdown/imgui_markdown.h"
 
-CIMGUI_API typedef void MarkdownLinkCallback(MarkdownLinkCallbackData data)
-{
-    return ImGui::MarkdownLinkCallback(data);
-}
-CIMGUI_API typedef void MarkdownTooltipCallback(MarkdownTooltipCallbackData data)
-{
-    return ImGui::MarkdownTooltipCallback(data);
-}
 CIMGUI_API void defaultMarkdownTooltipCallback(MarkdownTooltipCallbackData data_)
 {
     return ImGui::defaultMarkdownTooltipCallback(data_);
-}
-CIMGUI_API typedef MarkdownImageData MarkdownImageCallback(MarkdownLinkCallbackData data)
-{
-    return ImGui::MarkdownImageCallback(data);
-}
-CIMGUI_API typedef void MarkdownFormalCallback(const MarkdownFormatInfo markdownFormatInfo_,bool start_)
-{
-    return ImGui::MarkdownFormalCallback(markdownFormatInfo_,start_);
 }
 CIMGUI_API TextRegion* NewTextRegion(void)
 {
