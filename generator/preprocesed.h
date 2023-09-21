@@ -41,7 +41,7 @@ namespace ImGui
         MarkdownFormatType type = MarkdownFormatType::NORMAL_TEXT;
         int32_t level = 0;
         bool itemHovered = false;
-        const MarkdownConfig* config = NULL;
+        const MarkdownConfig* config =                                          ((void *)0)                                             ;
     };
     typedef void (MarkdownLinkCallback)( MarkdownLinkCallbackData data );
     typedef void (MarkdownTooltipCallback)( MarkdownTooltipCallbackData data );
@@ -67,12 +67,12 @@ namespace ImGui
     struct MarkdownConfig
     {
         static const int NUMHEADINGS = 3;
-        MarkdownLinkCallback* linkCallback = NULL;
-        MarkdownTooltipCallback* tooltipCallback = NULL;
-        MarkdownImageCallback* imageCallback = NULL;
+        MarkdownLinkCallback* linkCallback =                                               ((void *)0)                                                  ;
+        MarkdownTooltipCallback* tooltipCallback =                                                   ((void *)0)                                                      ;
+        MarkdownImageCallback* imageCallback =                                                ((void *)0)                                                   ;
         const char* linkIcon = "";
-        MarkdownHeadingFormat headingFormats[ NUMHEADINGS ] = { { NULL, true }, { NULL, true }, { NULL, true } };
-        void* userData = NULL;
+        MarkdownHeadingFormat headingFormats[ NUMHEADINGS ] = { {                                                                    ((void *)0)                                                                       , true }, {                                                                                    ((void *)0)                                                                                       , true }, {                                                                                                    ((void *)0)                                                                                                       , true } };
+        void* userData =                                           ((void *)0)                                              ;
         MarkdownFormalCallback* formatCallback = defaultMarkdownFormatCallback;
     };
     inline void Markdown( const char* markdown_, size_t markdownLength_, const MarkdownConfig& mdConfig_ );
@@ -242,7 +242,7 @@ namespace ImGui
     }
     inline void Markdown( const char* markdown_, size_t markdownLength_, const MarkdownConfig& mdConfig_ )
     {
-        static const char* linkHoverStart = NULL;
+        static const char* linkHoverStart =                                            ((void *)0)                                               ;
         ImGuiStyle& style = ImGui::GetStyle();
         Line line;
         Link link;
@@ -599,7 +599,7 @@ namespace ImGui
             }
             if( !bHovered && *linkHoverStart_ == markdown_ + link_.text.start )
             {
-                *linkHoverStart_ = NULL;
+                *linkHoverStart_ =                                   ((void *)0)                                      ;
             }
         }
     inline void defaultMarkdownFormatCallback( const MarkdownFormatInfo& markdownFormatInfo_, bool start_ )
