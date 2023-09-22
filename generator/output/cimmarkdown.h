@@ -59,8 +59,8 @@ struct MarkdownFormatInfo
         bool itemHovered;
         const MarkdownConfig* config;
 };
-typedef void(MarkdownLinkCallback);
-typedef MarkdownImageData(MarkdownImageCallback);
+typedef void (MarkdownLinkCallback)( MarkdownLinkCallbackData data );
+typedef MarkdownImageData (MarkdownImageCallback)( MarkdownLinkCallbackData data );
 typedef struct MarkdownHeadingFormat MarkdownHeadingFormat;
 struct MarkdownHeadingFormat
 {

@@ -325,7 +325,6 @@ local function getRE()
 	class_re = "^([^;{}]-class[^;{}]-%b{}%s*;)",
 	typedef_re = "^\n*%s*(typedef[^;]+;)",
 	typedef_st_re = "^\n*(typedef%s+struct%s*%b{}.-;)",
-	functypedef_re = "^\n*%s*(typedef[%w%s%*_]+%(%s*%*%s*[%w_]+%s*%)%s*%b()%s*;)",
 	functypedef_re = "^\n*%s*(typedef[%w%s%*_]+%([^*]*%*?%s*[%w_]+%s*%)%s*%b()%s*;)",
 	--vardef_re = "^\n*([^;{}%(%)]+;)",
 	--change for things as
@@ -366,7 +365,6 @@ local function parseItems(txt,linenumdict, itparent, dumpit)
 			local re = res[re_name]
 			local i,e = txt:find(re,ini)
 			if i then
-				
 				item = txt:sub(i,e)
 				--print("re_name:",re_name,string.format("%q",item))
 				------------------
@@ -601,7 +599,9 @@ local function clean_names_from_signature(self,signat)
 	return result
 end
 local function clean_functypedef(line)
-	local first, args = line:match("(typedef .-%(-%*-[_%w]+%)-)%s*(%b())")
+	local first, args = line:match("(typedef .-%(%*-[_%w]+%))%s*(%b())")
+	print("dupskooooooooo")
+	print(line)
 
 	if not args then
 		print"not getting args in"
@@ -1294,11 +1294,11 @@ function M.Parser()
 					local typename = it.item:match("^%s*template%s*<%s*typename%s*(%S+)%s*>")
 					local stname = it.item:match("struct%s+(%S+)")
 					it.name = stname
-					
+
 					--local templa1,templa2 = it.item:match("^%s*template%s*<%s*(%S+)%s*(%S+)%s*>")
 					local templa2 = it.item:match("^%s*template%s*<%s*([^<>]+)%s*>")
 					if templa1 or templa2 then print("template found",stname,templa1,templa2,"typename",typename) end
-					
+
 					if typename or templa2 then -- it is a struct template
 						self.typenames = self.typenames or {}
 						self.typenames[stname] = typename or templa2
@@ -1307,9 +1307,9 @@ function M.Parser()
 					it.name = it.item:match("namespace%s+(%S+)")
 				end
 			end
+			end
+			return itsarr
 		end
-		return itsarr
-	end
 	local function sanitize_comments(txt)
 		local txtclean = {}
 		local reg = "//[^\n\r]+"
@@ -1349,32 +1349,32 @@ function M.Parser()
 		--save_data("./preprocode"..tostring(self):gsub("table: ","")..".c",txt)
 		--clean bad positioned comments inside functionD_re
 		if self.COMMENTS_GENERATION then
-		print"cleaning { and } inside comments"
+			print"cleaning { and } inside comments"
 			txt = sanitize_comments(txt)
-		print"cleaning comments inside functionD_re--------------"
-		---[[
-		local nn = 0
-		local txtclean = {}
-		local reg = "(\n[%w%s]-[%w]+%s*%b())(%s*//[^\n]*)([\n%s%w]*%b{}%s-;*)"
-		--reg = "^([^;{}]-%b()[\n%s%w]*%b{}%s-;*)"
-		local ini = 1
-		local i,e,a,b,c = txt:find(reg,ini)
-		while i do
-			print(i,e,#txt)
-			table.insert(txtclean,txt:sub(ini,i-1))
-			table.insert(txtclean,a)
-			print("a:",a)
-			print("b:",b)
-			print("c:",c)
-			c = c:gsub("(%s*//[^\n]*)","")
-			table.insert(txtclean,c)
-			nn = nn + 1
-			ini = e + 1
-			i,e,a,b,c = txt:find(reg,ini)
-		end
-		table.insert(txtclean,txt:sub(ini))
-		print("end cleaning ------------------------------",nn)
-		txt = table.concat(txtclean)
+			print"cleaning comments inside functionD_re--------------"
+			---[[
+			local nn = 0
+			local txtclean = {}
+			local reg = "(\n[%w%s]-[%w]+%s*%b())(%s*//[^\n]*)([\n%s%w]*%b{}%s-;*)"
+			--reg = "^([^;{}]-%b()[\n%s%w]*%b{}%s-;*)"
+			local ini = 1
+			local i,e,a,b,c = txt:find(reg,ini)
+			while i do
+				print(i,e,#txt)
+				table.insert(txtclean,txt:sub(ini,i-1))
+				table.insert(txtclean,a)
+				print("a:",a)
+				print("b:",b)
+				print("c:",c)
+				c = c:gsub("(%s*//[^\n]*)","")
+				table.insert(txtclean,c)
+				nn = nn + 1
+				ini = e + 1
+				i,e,a,b,c = txt:find(reg,ini)
+			end
+			table.insert(txtclean,txt:sub(ini))
+			print("end cleaning ------------------------------",nn)
+			txt = table.concat(txtclean)
 		end
 		--save_data("./preparse"..tostring(self):gsub("table: ","")..".c",txt)
 		--]]
