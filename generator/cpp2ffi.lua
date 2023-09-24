@@ -1500,7 +1500,8 @@ function M.Parser()
 				end
 				predeclare = predeclare .. predec .. cleanst
 			elseif it.re_name == "enum_re" then
-				--nop
+				local name,decl = it.item:match("enum%s*(%w+)%s*(%b{})")
+				predeclare = predeclare .. "\ntypedef enum " .. decl .. " " .. name
 			elseif it.re_name ~= "functionD_re" and it.re_name ~= "function_re" then
 				print(it.re_name,"not processed clean_struct in",stname,it.item:sub(1,24))
 				--M.prtable(it)
@@ -1550,9 +1551,9 @@ function M.Parser()
 							--self.templates[ttype] = self.templates[ttype] or {}
 							--self.templates[ttype][template] = te
 							--end
-							
+
 							--local templatetypedef = self:gentemplatetypedef(ttype, template,self.templates[ttype][template])
-								--predeclare = predeclare .. templatetypedef
+							--predeclare = predeclare .. templatetypedef
 
 							local tdt = self:gentemplatetypedef(ttype,template,te)
 							it2 = tdt..code2
@@ -1584,50 +1585,55 @@ function M.Parser()
 					end
 				end
 			elseif it.re_name == "enum_re" then
-				--local enumname, enumbody = it.item:match"^%s*enum%s+([^%s;{}]+)[%s\n\r]*(%b{})"
-				local enumname = it.item:match"^%s*enum%s+c?l?a?s?s?%s*([^%s;{}]+)"
-				if enumname then
-					--if it's an enum with int type changed
-					if self.structs_and_enums_table.enumtypes[enumname] then
-						local enumtype = self.structs_and_enums_table.enumtypes[enumname]
-						local enumbody = ""
-						local extraenums = ""
-						for i,v in ipairs(self.structs_and_enums_table.enums[enumname]) do
-							if type(v.calc_value)=="string" then
-								extraenums = extraenums .."\nstatic const "..enumtype.." "..v.name.." = "..v.calc_value..";"
-							else
-								enumbody = enumbody .. "\n" ..v.name .."="..v.value..","
+				if not (it.parent.re_name == "struct_re") then -- this ensures that we don't try to add enum predeclared in struct generation
+					print("////")
+					print("parent type", it.parent.re_name)
+					print("this type", it.re_name)
+					print(it.item)
+					--local enumname, enumbody = it.item:match"^%s*enum%s+([^%s;{}]+)[%s\n\r]*(%b{})"
+					local enumname = it.item:match"^%s*enum%s+c?l?a?s?s?%s*([^%s;{}]+)"
+					if enumname then
+						--if it's an enum with int type changed
+						if self.structs_and_enums_table.enumtypes[enumname] then
+							local enumtype = self.structs_and_enums_table.enumtypes[enumname]
+							local enumbody = ""
+							local extraenums = ""
+							for i,v in ipairs(self.structs_and_enums_table.enums[enumname]) do
+								if type(v.calc_value)=="string" then
+									extraenums = extraenums .."\nstatic const "..enumtype.." "..v.name.." = "..v.calc_value..";"
+								else
+									enumbody = enumbody .. "\n" ..v.name .."="..v.value..","
+								end
+							end
+							enumbody = "{"..enumbody.."\n}"
+							table.insert(outtab,"\ntypedef enum ".. enumbody..enumname..";"..extraenums)
+						else
+							local enumbody = it.item:match"(%b{})"
+							enumbody = clean_comments(enumbody)
+							table.insert(outtab,"\ntypedef enum ".. enumbody..enumname..";")
+						end
+						if it.parent then
+							if it.parent.re_name == "namespace_re" then
+								local namespace = it.parent.item:match("namespace%s+(%S+)")
+								self.embeded_enums[enumname] = namespace.."::"..enumname
 							end
 						end
-						enumbody = "{"..enumbody.."\n}"
-						table.insert(outtab,"\ntypedef enum ".. enumbody..enumname..";"..extraenums)
-					else
-						local enumbody = it.item:match"(%b{})"
-						enumbody = clean_comments(enumbody)
-						table.insert(outtab,"\ntypedef enum ".. enumbody..enumname..";")
+					else --unamed enum just repeat declaration
+						local cl_item = clean_comments(it.item)
+						table.insert(outtab,cl_item)
+						print("unnamed enum",cl_item)
 					end
-					if it.parent then
-						if it.parent.re_name == "namespace_re" then
-							local namespace = it.parent.item:match("namespace%s+(%S+)")
-							self.embeded_enums[enumname] = namespace.."::"..enumname
-						end
-					end
-				else --unamed enum just repeat declaration
-					local cl_item = clean_comments(it.item)
-					table.insert(outtab,cl_item)
-					print("unnamed enum",cl_item)
 				end
 			elseif it.re_name == "struct_re" or it.re_name == "typedef_st_re" then
 				local cleanst,structname,strtab,comstab,predec = self:clean_structR1(it,true)
 				if not structname then print("NO NAME",cleanst,it.item) end
 				--if not void stname or templated
 				if structname and not self.typenames[structname] then
-					
 					--table.insert(typedefs_table,"typedef struct "..structname.." "..structname..";\n")
 					local tst = "\ntypedef struct "..structname.." "..structname..";"
-						if check_unique_typedefs(tst,uniques) then
-							table.insert(outtab,tst)
-						end
+					if check_unique_typedefs(tst,uniques) then
+						table.insert(outtab,tst)
+					end
 					self.typedefs_dict[structname]="struct "..structname
 					--dont insert child structs as they are inserted before parent struct
 					if not (it.parent and it.parent.re_name == "struct_re") then

@@ -104,6 +104,12 @@ struct TextBlock
         int start;
         int stop;
 };
+typedef enum {
+            NO_LINK,
+            HAS_SQUARE_BRACKET_OPEN,
+            HAS_SQUARE_BRACKETS,
+            HAS_SQUARE_BRACKETS_ROUND_BRACKET_OPEN,
+        } LinkState
 struct Link
 {
         LinkState state;
@@ -112,25 +118,19 @@ struct Link
         bool isImage;
         int num_brackets_open;
 };
-typedef enum {
-            NO_LINK,
-            HAS_SQUARE_BRACKET_OPEN,
-            HAS_SQUARE_BRACKETS,
-            HAS_SQUARE_BRACKETS_ROUND_BRACKET_OPEN,
-        }LinkState;
 typedef struct Emphasis Emphasis;
+typedef enum {
+   NONE,
+   LEFT,
+   MIDDLE,
+   RIGHT,
+  } EmphasisState
 struct Emphasis
 {
         EmphasisState state;
         TextBlock text;
         char sym;
 };
-typedef enum {
-   NONE,
-   LEFT,
-   MIDDLE,
-   RIGHT,
-  }EmphasisState;
 #else
 
 #endif // CIMGUI_DEFINE_ENUMS_AND_STRUCTS
