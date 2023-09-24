@@ -144,6 +144,7 @@ defs["structs"]["MarkdownConfig"][4]["name"] = "linkIcon"
 defs["structs"]["MarkdownConfig"][4]["type"] = "const char*"
 defs["structs"]["MarkdownConfig"][5] = {}
 defs["structs"]["MarkdownConfig"][5]["name"] = "headingFormats[NUMHEADINGS]"
+defs["structs"]["MarkdownConfig"][5]["size"] = 3
 defs["structs"]["MarkdownConfig"][5]["type"] = "MarkdownHeadingFormat"
 defs["structs"]["MarkdownConfig"][6] = {}
 defs["structs"]["MarkdownConfig"][6]["name"] = "userData"

@@ -1897,6 +1897,8 @@ function M.Parser()
 						t.size = tonumber(val)
 					elseif allenums[val] then
 						t.size = allenums[val]
+					elseif val == "NUMHEADINGS" then -- specific case for cimmarkdown; FIXME
+						t.size = 3
 					else
 						local f,err = loadstring("estevalor="..val)
 						if not f then print("error on loadstring",err,"with val:",val) end
@@ -1906,7 +1908,7 @@ function M.Parser()
 					--assert(t.size,val)
 					if not t.size then
 						print("not t.size for",val,"in",t.name)
-						--error"not t.size" -- FIXME: I've ommented it out
+						error"not t.size"
 					end
 				end
 			end
