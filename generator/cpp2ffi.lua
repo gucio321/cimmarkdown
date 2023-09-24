@@ -1501,7 +1501,7 @@ function M.Parser()
 				predeclare = predeclare .. predec .. cleanst
 			elseif it.re_name == "enum_re" then
 				local name,decl = it.item:match("enum%s*(%w+)%s*(%b{})")
-				predeclare = predeclare .. "\ntypedef enum " .. decl .. " " .. name
+				predeclare = predeclare .. "\ntypedef enum " .. decl .. " " .. name .. ";\n"
 			elseif it.re_name ~= "functionD_re" and it.re_name ~= "function_re" then
 				print(it.re_name,"not processed clean_struct in",stname,it.item:sub(1,24))
 				--M.prtable(it)

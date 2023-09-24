@@ -109,7 +109,8 @@ typedef enum {
             HAS_SQUARE_BRACKET_OPEN,
             HAS_SQUARE_BRACKETS,
             HAS_SQUARE_BRACKETS_ROUND_BRACKET_OPEN,
-        } LinkState
+        } LinkState;
+
 struct Link
 {
         LinkState state;
@@ -124,7 +125,8 @@ typedef enum {
    LEFT,
    MIDDLE,
    RIGHT,
-  } EmphasisState
+  } EmphasisState;
+
 struct Emphasis
 {
         EmphasisState state;
