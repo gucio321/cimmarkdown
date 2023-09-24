@@ -1302,9 +1302,9 @@ function M.Parser()
 					it.name = it.item:match("namespace%s+(%S+)")
 				end
 			end
-			end
-			return itsarr
 		end
+		return itsarr
+	end
 	local function sanitize_comments(txt)
 		local txtclean = {}
 		local reg = "//[^\n\r]+"
