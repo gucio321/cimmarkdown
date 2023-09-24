@@ -43,8 +43,8 @@ namespace ImGui
         bool itemHovered = false;
         const MarkdownConfig* config =                                          ((void *)0)                                             ;
     };
-    typedef void (MarkdownLinkCallback)( MarkdownLinkCallbackData data );
-    typedef void (MarkdownTooltipCallback)( MarkdownTooltipCallbackData data );
+    typedef void MarkdownLinkCallback( MarkdownLinkCallbackData data );
+    typedef void MarkdownTooltipCallback( MarkdownTooltipCallbackData data );
     inline void defaultMarkdownTooltipCallback( MarkdownTooltipCallbackData data_ )
     {
         if( data_.linkData.isImage )
@@ -56,8 +56,8 @@ namespace ImGui
             ImGui::SetTooltip( "%s Open in browser\n%.*s", data_.linkIcon, data_.linkData.linkLength, data_.linkData.link );
         }
     }
-    typedef MarkdownImageData (MarkdownImageCallback)( MarkdownLinkCallbackData data );
-    typedef void (MarkdownFormalCallback)( const MarkdownFormatInfo& markdownFormatInfo_, bool start_ );
+    typedef MarkdownImageData MarkdownImageCallback( MarkdownLinkCallbackData data );
+    typedef void MarkdownFormalCallback( const MarkdownFormatInfo& markdownFormatInfo_, bool start_ );
     inline void defaultMarkdownFormatCallback( const MarkdownFormatInfo& markdownFormatInfo_, bool start_ );
     struct MarkdownHeadingFormat
     {

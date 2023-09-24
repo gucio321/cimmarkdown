@@ -325,7 +325,7 @@ local function getRE()
 	class_re = "^([^;{}]-class[^;{}]-%b{}%s*;)",
 	typedef_re = "^\n*%s*(typedef[^;]+;)",
 	typedef_st_re = "^\n*(typedef%s+struct%s*%b{}.-;)",
-	functypedef_re = "^\n*%s*(typedef[%w%s%*_]+%([^*]%*?%s*[%w_]+%s*%)%s*%b()%s*;)",
+	functypedef_re = "^\n*%s*(typedef[%w%s%*_]+%(-[^*]%*?%s*[%w_]+%s*%)-%s*%b()%s*;)",
 	--vardef_re = "^\n*([^;{}]+;)",
 	vardef_re = "^\n*([^;]+;)",
 	functionD_re = "^([^;{}]-%b()[\n%s%w]*%b{}%s-;*)",
@@ -596,9 +596,7 @@ local function clean_names_from_signature(self,signat)
 	return result
 end
 local function clean_functypedef(line)
-	local first, args = line:match("(typedef .-%(%*-[_%w]+%))%s*(%b())")
-	print("dupskooooooooo")
-	print(line)
+	local first, args = line:match("(typedef .-%(-%*-[_%w]+%)-)%s*(%b())")
 
 	if not args then
 		print"not getting args in"
