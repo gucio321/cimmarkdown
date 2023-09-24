@@ -3,6 +3,8 @@
 #ifndef CIMMARKDOWN_INCLUDED
 #define CIMMARKDOWN_INCLUDED
 
+#define NUMHEADINGS 3 // this is because struct field in imgui_markdown is static so we can't wrap it to C
+
 #include "cimgui.h"
 
 #ifdef CIMGUI_DEFINE_ENUMS_AND_STRUCTS
