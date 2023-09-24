@@ -60,7 +60,9 @@ struct MarkdownFormatInfo
         const MarkdownConfig* config;
 };
 typedef void (MarkdownLinkCallback)( MarkdownLinkCallbackData data );
+typedef void (MarkdownTooltipCallback)( MarkdownTooltipCallbackData data );
 typedef MarkdownImageData (MarkdownImageCallback)( MarkdownLinkCallbackData data );
+typedef void (MarkdownFormalCallback)( const MarkdownFormatInfo markdownFormatInfo_, bool start_ );
 typedef struct MarkdownHeadingFormat MarkdownHeadingFormat;
 struct MarkdownHeadingFormat
 {
