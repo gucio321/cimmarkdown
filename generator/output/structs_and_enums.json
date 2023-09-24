@@ -186,8 +186,8 @@
         "type": "const char*"
       },
       {
-        "name": "]",
-        "type": "MarkdownHeadingFormat headingFormats[ NUMHEADINGS"
+        "name": "headingFormats[NUMHEADINGS]",
+        "type": "MarkdownHeadingFormat"
       },
       {
         "name": "userData",

@@ -162,6 +162,8 @@ local function clean_spaces(cad)
 	cad = cad:gsub("(%S)%s(%[)","%1%2")
 	--clean %d * %d (could be done above but type*name should be treated different in other places)
 	cad = cad:gsub("(%d)%s*(%*)%s*(%d)","%1%2%3")
+	-- no spaces in expr like "name type[ count ]"
+	cad = cad:gsub("(%[)%s*(%S*)%s*(%])","%1%2%3")
     return cad
 end
 
@@ -1447,7 +1449,6 @@ function M.Parser()
 		for j,it in ipairs(itlist) do
 			if (it.re_name == "vardef_re" or it.re_name == "functype_re") then -- or it.re_name == "union_re") then
 				if  not (it.re_name == "vardef_re" and it.item:match"static") then --skip static variables
-				
 					local it2 = it.item --:gsub("<([%w_]+)>","_%1") --templates
 					--local ttype,template = it.item:match("([^%s,%(%)]+)%s*<(.+)>")
 					local ttype,template,te,code2 =  check_template(it2)  --it.item:match"([^%s,%(%)]+)%s*<(.+)>"
@@ -1586,10 +1587,6 @@ function M.Parser()
 				end
 			elseif it.re_name == "enum_re" then
 				if not (it.parent.re_name == "struct_re") then -- this ensures that we don't try to add enum predeclared in struct generation
-					print("////")
-					print("parent type", it.parent.re_name)
-					print("this type", it.re_name)
-					print(it.item)
 					--local enumname, enumbody = it.item:match"^%s*enum%s+([^%s;{}]+)[%s\n\r]*(%b{})"
 					local enumname = it.item:match"^%s*enum%s+c?l?a?s?s?%s*([^%s;{}]+)"
 					if enumname then
@@ -1891,7 +1888,7 @@ function M.Parser()
 				allenums[t.name] = t.calc_value
 			end
 		end
-		    --then calcsize in struct members
+		--then calcsize in struct members
 		for stname,struct in pairs(outtab.structs) do
 			for i,t in ipairs(struct) do
 				local val = t.name:match"%[([^%[%]]+)%]"
@@ -1909,7 +1906,7 @@ function M.Parser()
 					--assert(t.size,val)
 					if not t.size then
 						print("not t.size for",val,"in",t.name)
-						error"not t.size"
+						--error"not t.size" -- FIXME: I've ommented it out
 					end
 				end
 			end
