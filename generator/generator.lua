@@ -171,6 +171,10 @@ local function parseImGuiHeader(header,names)
 	--prepare parser
 	local parser = cpp2ffi.Parser()
 	parser.getCname = function(stname,funcname,namespace)
+		if stname == funcname then
+			return stname .. "_" .. funcname
+		end
+
 		return funcname
 	end
 	parser.cname_overloads = cimgui_overloads

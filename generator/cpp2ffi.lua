@@ -675,17 +675,17 @@ local function parseFunction(self,stname,itt,namespace,locat)
 	line = line:gsub("%*([%w_])","%* %1")
 	line = line:gsub("(%(%*)%s","%1")
 
-    --clean implemetation
-    line = line:gsub("%s*%b{}","")
-    --clean attribute
-    line = line:gsub("%s*__attribute__%b()","")
-    --clean static and inline and mutable
+	--clean implemetation
+	line = line:gsub("%s*%b{}","")
+	--clean attribute
+	line = line:gsub("%s*__attribute__%b()","")
+	--clean static and inline and mutable
 	local is_static_function
 	if line:match("static") and stname~="" then
 		--print("parseFuncion static",line)
 		is_static_function = true
 	end
-    line = line:gsub("static","")
+	line = line:gsub("static","")
 	line = line:gsub("inline","")
 	line = line:gsub("mutable","")
 	line = line:gsub("explicit","")
@@ -694,13 +694,13 @@ local function parseFunction(self,stname,itt,namespace,locat)
 	--skip operator
 	if line:match("operator") then return end
 	--skip template
-	if line:match("template") then 
+	if line:match("template") then
 		--print("template",lineorig)
-		return 
+		return
 	end
-    
-    local ret = line:match("([^%(%):,]+[%*%s])%s?~?[_%w]+%b()")
-    --local funcname, args = line:match("(~?[_%w]+)%s*(%b())")
+
+	local ret = line:match("([^%(%):,]+[%*%s])%s?~?[_%w]+%b()")
+	--local funcname, args = line:match("(~?[_%w]+)%s*(%b())")
 	local funcname, args, extraconst = line:match("(~?[_%w]+)%s*(%b())(.*)")
 	-- check if funcname is not duplicate (doesn't exist in defsT)
 	-- this may break overloads but in imgui_markdown it doesn't matter
@@ -716,9 +716,9 @@ local function parseFunction(self,stname,itt,namespace,locat)
 		print(line,lineorig)
 		print(funcname,"args",args)
 		error"parseFunction not getting args"
-    end
-	
-	
+	end
+
+
 	local argsp = args:sub(2,-2)..","
 	local argsTa = {}
 	for tynam in argsp:gmatch("([^,]+),") do
@@ -744,12 +744,12 @@ local function parseFunction(self,stname,itt,namespace,locat)
 				self.templates[ttype][template] = te
 			end
 		end
-	    argsTa[i] = te and code2 or ar --ar:gsub("<([%w_%*%s]+)>",te) --ImVector
+		argsTa[i] = te and code2 or ar --ar:gsub("<([%w_%*%s]+)>",te) --ImVector
 	end
-	
+
 	--get typ, name and defaults
 	local functype_re =        "^%s*[%w%s%*]+%(%*%s*[%w_]+%)%([^%(%)]*%)"
-    local functype_reex =     "^(%s*[%w%s%*]+)%(%*%s*([%w_]+)%)(%([^%(%)]*%))"
+	local functype_reex =     "^(%s*[%w%s%*]+)%(%*%s*([%w_]+)%)(%([^%(%)]*%))"
 	local argsTa2 = {}
 	local noname_counter = 0
 	for i,ar in ipairs(argsTa) do
@@ -759,9 +759,9 @@ local function parseFunction(self,stname,itt,namespace,locat)
 		if ar:match(functype_re) then
 			local t1,namef,t2 = ar:match(functype_reex)
 			local f_ = has_cdecl and "(__cdecl*)" or "(*)"
-            typ, name = t1..f_..t2, namef
-            retf = t1
-            sigf = t2
+			typ, name = t1..f_..t2, namef
+			retf = t1
+			sigf = t2
 		else
 			reftoptr = nil
 			if ar:match("&") then
@@ -771,8 +771,8 @@ local function parseFunction(self,stname,itt,namespace,locat)
 					ar = ar:gsub("&","*")
 					reftoptr = true
 				end
-            end
-			if ar:match("%.%.%.") then 
+			end
+			if ar:match("%.%.%.") then
 				typ, name = "...", "..."
 			else
 				ar1,defa = ar:match"([^=]+)=([^=]+)"
@@ -788,22 +788,22 @@ local function parseFunction(self,stname,itt,namespace,locat)
 				name = "noname"..noname_counter
 			end
 			--float name[2] to float[2] name
-            local siz = name:match("(%[%d*%])")
-            if siz then
-                typ = typ..siz
-                name = name:gsub("(%[%d*%])","")
-            end
+			local siz = name:match("(%[%d*%])")
+			if siz then
+				typ = typ..siz
+				name = name:gsub("(%[%d*%])","")
+			end
 		end
 		argsTa2[i] = {type=typ,name=name,default=defa,reftoptr=reftoptr,ret=retf,signature=sigf,has_cdecl=has_cdecl}
 		if ar:match("&") and not ar:match("const") then
-            --only post error if not manual
-            local cname = self.getCname(stname,funcname, namespace) --cimguiname
-            if not self.manuals[cname] then
-                print("reference to no const arg in",funcname,argscsinpars,ar)
-            end
-        end
+			--only post error if not manual
+			local cname = self.getCname(stname,funcname, namespace) --cimguiname
+			if not self.manuals[cname] then
+				print("reference to no const arg in",funcname,argscsinpars,ar)
+			end
+		end
 	end
-	
+
 	local argsArr = argsTa2
 
 	--recreate argscsinpars, call_args and signature from argsArr
@@ -822,7 +822,7 @@ local function parseFunction(self,stname,itt,namespace,locat)
 				local siz = v.type:match("(%[%d*%])") or ""
 				local typ = v.type:gsub("(%[%d*%])","")
 				asp = asp .. typ .. (v.name~="..." and " "..v.name or "") .. siz .. ","
-				local callname = v.reftoptr and "*"..v.name or v.name 
+				local callname = v.reftoptr and "*"..v.name or v.name
 				caar = caar .. callname .. ","
 				signat = signat .. typ .. siz .. ","
 			end
@@ -836,17 +836,17 @@ local function parseFunction(self,stname,itt,namespace,locat)
 		signat = "()" .. (extraconst or "")
 	end
 
-    ------------------------------
-    
-    if not ret and stname then --must be constructors
-        if not (stname == funcname or "~"..stname==funcname) then --break end
-            print("false constructor:",line);
-            print("b2:",ret,stname,funcname,args)
-            return --are function defs
-        end
-    end
-    
-    local cimguiname = self.getCname(stname,funcname, namespace)
+	------------------------------
+
+	if not ret and stname then --must be constructors
+		if not (stname == funcname or "~"..stname==funcname) then --break end
+			print("false constructor:",line);
+			print("b2:",ret,stname,funcname,args)
+			return --are function defs
+		end
+	end
+
+	local cimguiname = self.getCname(stname,funcname, namespace)
     table.insert(self.funcdefs,{stname=stname,funcname=funcname,args=args,signature=signat,cimguiname=cimguiname,call_args=caar,ret =ret})
 	local defsT = self.defsT
 	defsT[cimguiname] = defsT[cimguiname] or {}
@@ -1095,37 +1095,37 @@ local function ADDdestructors(FP)
         newcdefs[#newcdefs+1] = t
         if t.cimguiname then
             local defT = defsT[t.cimguiname]
-        if not defT[1].ret and not defT[1].constructor then --if constructor not processed
-            if defT[1].funcname:match("~") then
-                defsT[t.cimguiname] = nil --clear destructor
-                newcdefs[#newcdefs] = nil
-            else
-				for j,cons in ipairs(defT) do
-					cons.constructor = true
+			if not defT[1].ret and not defT[1].constructor then --if constructor not processed
+				if defT[1].funcname:match("~") then
+					defsT[t.cimguiname] = nil --clear destructor
+					newcdefs[#newcdefs] = nil
+				else
+					for j,cons in ipairs(defT) do
+						cons.constructor = true
+					end
+					if(defT[1].stname~=defT[1].funcname) then
+						print(defT[1].stname, defT[1].funcname)
+						error"names should be equal"
+					end
+					local def = {}
+					def.stname = defT[1].stname
+					def.templated = defT[1].templated
+					def.location = keep_dest_locat[defT[1].stname]
+					def.ret = "void"
+					def.ov_cimguiname = def.stname.."_destroy"
+					def.cimguiname = def.ov_cimguiname
+					def.destructor = true
+					def.realdestructor = def.location and true
+					def.args = "("..def.stname.."* self)"
+					def.call_args = "(self)"
+					def.signature = "("..def.stname.."*)"
+					def.defaults = {}
+					def.argsT = {{type=def.stname.."*",name="self"}}
+					defsT[def.ov_cimguiname] = {def}
+					defsT[def.ov_cimguiname][def.signature] = def
+					newcdefs[#newcdefs+1]={stname=def.stname,funcname=def.ov_cimguiname,args=def.args,signature=def.signature,cimguiname=def.cimguiname,call_args=def.call_args,ret =def.ret}
 				end
-				if(defT[1].stname~=defT[1].funcname) then
-					print(defT[1].stname, defT[1].funcname)
-					error"names should be equal"
-				end
-				local def = {}
-				def.stname = defT[1].stname
-				def.templated = defT[1].templated
-				def.location = keep_dest_locat[defT[1].stname]
-				def.ret = "void"
-				def.ov_cimguiname = def.stname.."_destroy"
-				def.cimguiname = def.ov_cimguiname
-				def.destructor = true
-				def.realdestructor = def.location and true
-				def.args = "("..def.stname.."* self)"
-				def.call_args = "(self)"
-				def.signature = "("..def.stname.."*)"
-				def.defaults = {}
-				def.argsT = {{type=def.stname.."*",name="self"}}
-				defsT[def.ov_cimguiname] = {def}
-				defsT[def.ov_cimguiname][def.signature] = def
-				newcdefs[#newcdefs+1]={stname=def.stname,funcname=def.ov_cimguiname,args=def.args,signature=def.signature,cimguiname=def.cimguiname,call_args=def.call_args,ret =def.ret}
-            end
-        end
+			end
         end
     end
     FP.funcdefs = newcdefs
@@ -2387,7 +2387,7 @@ local function func_implementation(FP)
             if def.constructor then
                 assert(def.stname ~= "","constructor without struct")
                 local empty = def.args:match("^%(%)") --no args
-                table.insert(outtab,"CIMGUI_API "..def.stname.."* New"..def.ov_cimguiname..(empty and "(void)" or def.args).."\n")
+                table.insert(outtab,"CIMGUI_API "..def.stname.."* "..def.ov_cimguiname..(empty and "(void)" or def.args).."\n")
                 table.insert(outtab,"{\n")
                 table.insert(outtab,"    return IM_NEW("..def.stname..")"..def.call_args..";\n")
                 table.insert(outtab,"}\n")
@@ -2459,7 +2459,7 @@ local function func_header_generate_funcs(FP)
             local empty = def.args:match("^%(%)") --no args
             if def.constructor then
                 assert(def.stname ~= "","constructor without struct")
-                table.insert(outtab,"CIMGUI_API "..def.stname.."* New"..def.ov_cimguiname ..(empty and "(void)" or def.args)..";"..addcoment.."\n")
+                table.insert(outtab,"CIMGUI_API "..def.stname.."* "..def.ov_cimguiname ..(empty and "(void)" or def.args)..";"..addcoment.."\n")
             elseif def.destructor then
                 table.insert(outtab,"CIMGUI_API void "..def.ov_cimguiname..def.args..";"..addcoment.."\n")
             else --not constructor
