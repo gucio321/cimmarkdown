@@ -1,10 +1,2 @@
 ----------------overloadings---------------------------
-Markdown	2
-1	void	Markdown_Nil (const char*,size_t,const MarkdownConfig)
-RenderLine	2
-1	void	RenderLine_Nil (const char*,Line*,TextRegion*,const MarkdownConfig)
-UnderLine	2
-1	void	UnderLine_Nil (ImColor)
-defaultMarkdownFormatCallback	2
-1	void	defaultMarkdownFormatCallback_Nil (const MarkdownFormatInfo,bool)
-8 overloaded
+0 overloaded

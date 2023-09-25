@@ -675,7 +675,6 @@ local function parseFunction(self,stname,itt,namespace,locat)
 	line = line:gsub("%*([%w_])","%* %1")
 	line = line:gsub("(%(%*)%s","%1")
 
-	--print(line)
     --clean implemetation
     line = line:gsub("%s*%b{}","")
     --clean attribute
@@ -703,6 +702,13 @@ local function parseFunction(self,stname,itt,namespace,locat)
     local ret = line:match("([^%(%):,]+[%*%s])%s?~?[_%w]+%b()")
     --local funcname, args = line:match("(~?[_%w]+)%s*(%b())")
 	local funcname, args, extraconst = line:match("(~?[_%w]+)%s*(%b())(.*)")
+	-- check if funcname is not duplicate (doesn't exist in defsT)
+	-- this may break overloads but in imgui_markdown it doesn't matter
+	if self.defsT[funcname] then
+		print("parseFunction duplicate",funcname)
+		return
+	end
+
 	extraconst = extraconst:match("const")
 
 	if not args then
@@ -843,9 +849,9 @@ local function parseFunction(self,stname,itt,namespace,locat)
     local cimguiname = self.getCname(stname,funcname, namespace)
     table.insert(self.funcdefs,{stname=stname,funcname=funcname,args=args,signature=signat,cimguiname=cimguiname,call_args=caar,ret =ret})
 	local defsT = self.defsT
-	            defsT[cimguiname] = defsT[cimguiname] or {}
-                table.insert(defsT[cimguiname],{})
-                local defT = defsT[cimguiname][#defsT[cimguiname]] 
+	defsT[cimguiname] = defsT[cimguiname] or {}
+	table.insert(defsT[cimguiname],{})
+	local defT = defsT[cimguiname][#defsT[cimguiname]]
     defT.defaults = {}
 	for i,ar in ipairs(argsArr) do
 		if ar.default then
