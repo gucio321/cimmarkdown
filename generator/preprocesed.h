@@ -27,6 +27,7 @@ namespace ImGui
         ImVec2 uv1 = ImVec2( 1, 1 );
         ImVec4 tint_col = ImVec4( 1, 1, 1, 1 );
         ImVec4 border_col = ImVec4( 0, 0, 0, 0 );
+        ImVec4 bg_col = ImVec4( 0, 0, 0, 0 );
     };
     enum class MarkdownFormatType
     {
@@ -42,6 +43,8 @@ namespace ImGui
         int32_t level = 0;
         bool itemHovered = false;
         const MarkdownConfig* config =                                          ((void *)0)                                             ;
+        const char* text =                                          ((void *)0)                                             ;
+        int32_t textLength = 0;
     };
     typedef void MarkdownLinkCallback( MarkdownLinkCallbackData data );
     typedef void MarkdownTooltipCallback( MarkdownTooltipCallbackData data );
@@ -62,6 +65,7 @@ namespace ImGui
     struct MarkdownHeadingFormat
     {
         ImFont* font;
+        float fontSize;
         bool separator;
     };
     struct MarkdownConfig
@@ -91,9 +95,9 @@ namespace ImGui
         }
         void RenderTextWrapped( const char* text_, const char* text_end_, bool bIndentToHere_ = false )
         {
-            float scale = ImGui::GetIO().FontGlobalScale;
+                float scale = ImGui::GetIO().FontGlobalScale;
             float widthLeft = GetContentRegionAvail().x;
-            const char* endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                const char* endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
             ImGui::TextUnformatted( text_, endLine );
             if( bIndentToHere_ )
             {
@@ -109,7 +113,7 @@ namespace ImGui
             {
                 text_ = endLine;
                 if( *text_ == ' ' ) { ++text_; }
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                    endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
                 if( text_ == endLine )
                 {
                     endLine++;
@@ -215,8 +219,10 @@ namespace ImGui
         {
             formatInfo.level = line_.headingCount;
             formatInfo.type = MarkdownFormatType::HEADING;
-            mdConfig_.formatCallback( formatInfo, true );
             const char* text = markdown_ + textStart + 1;
+            formatInfo.text = text;
+            formatInfo.textLength = textSize - 1;
+            mdConfig_.formatCallback( formatInfo, true );
             textRegion_.RenderTextWrapped( text, text + textSize - 1 );
         }
   else if( line_.isEmphasis )
@@ -362,6 +368,11 @@ namespace ImGui
                             useLinkCallback = imageData.useLinkCallback;
                             if( imageData.isValid )
                             {
+                                if( imageData.bg_col.w > 0.0f )
+                                {
+                                    ImVec2 p = ImGui::GetCursorScreenPos();
+                                    ImGui::GetWindowDrawList()->AddRectFilled( p, ImVec2( p.x + imageData.size.x, p.y + imageData.size.y ), ImGui::GetColorU32( imageData.bg_col ));
+                                }
                                 ImGui::Image( imageData.user_texture_id, imageData.size, imageData.uv0, imageData.uv1, imageData.tint_col, imageData.border_col );
                                 drawnImage = true;
                             }
@@ -555,19 +566,19 @@ namespace ImGui
     inline void TextRegion::RenderLinkTextWrapped( const char* text_, const char* text_end_, const Link& link_,
         const char* markdown_, const MarkdownConfig& mdConfig_, const char** linkHoverStart_, bool bIndentToHere_ )
         {
-            float scale = ImGui::GetIO().FontGlobalScale;
+                float scale = ImGui::GetIO().FontGlobalScale;
             float widthLeft = GetContentRegionAvail().x;
             const char* endLine = text_;
             if( widthLeft > 0.0f )
             {
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                    endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
             }
             if( endLine > text_ && endLine < text_end_ )
             {
                 if( IsCharInsideWord( *endLine ) )
                 {
-                    float widthNextLine = GetContentRegionMax().x;
-                    const char* endNextLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthNextLine );
+                    float widthNextLine = widthLeft + GetCursorScreenPos().x - GetWindowPos().x;
+                        const char* endNextLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
                     if( endNextLine == text_end_ || ( endNextLine <= text_end_ && !IsCharInsideWord( *endNextLine ) ) )
                     {
                         endLine = text_;
@@ -589,7 +600,7 @@ namespace ImGui
             {
                 text_ = endLine;
                 if( *text_ == ' ' ) { ++text_; }
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                    endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
                 if( text_ == endLine )
                 {
                     endLine++;
@@ -629,8 +640,11 @@ namespace ImGui
        {
         if( fmt.font )
         {
-         ImGui::PushFont( fmt.font );
+         ImGui::PushFont( fmt.font);
         }
+                                    if (fmt.fontSize > 0.0f) {
+                                        ImGui::PushFont(                                                         ((void *)0)                                                            , fmt.fontSize );
+                                    }
        }
                 else
        {
@@ -638,6 +652,9 @@ namespace ImGui
         {
          ImGui::PopFont();
         }
+                                    if (fmt.fontSize > 0.0f) {
+                                        ImGui::PopFont();
+                                    }
        }
             }
             break;
@@ -659,6 +676,10 @@ namespace ImGui
                 {
                     ImGui::PushFont( fmt.font );
                 }
+                if( fmt.fontSize > 0.0f )
+                {
+                    ImGui::PushFont(                                     ((void *)0)                                        , fmt.fontSize );
+                }
                 ImGui::NewLine();
             }
             else
@@ -673,6 +694,10 @@ namespace ImGui
                     ImGui::NewLine();
                 }
                 if( fmt.font )
+                {
+                    ImGui::PopFont();
+                }
+                if( fmt.fontSize > 0.0f )
                 {
                     ImGui::PopFont();
                 }

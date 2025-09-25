@@ -74,20 +74,20 @@
   },
   "enumtypes": [],
   "locations": {
-    "Emphasis": "imgui_markdown:449",
-    "EmphasisState": "imgui_markdown:450",
-    "Line": "imgui_markdown:413",
-    "Link": "imgui_markdown:435",
-    "LinkState": "imgui_markdown:436",
-    "MarkdownConfig": "imgui_markdown:317",
-    "MarkdownFormatInfo": "imgui_markdown:279",
-    "MarkdownFormatType": "imgui_markdown:270",
-    "MarkdownHeadingFormat": "imgui_markdown:307",
+    "Emphasis": "imgui_markdown:465",
+    "EmphasisState": "imgui_markdown:466",
+    "Line": "imgui_markdown:429",
+    "Link": "imgui_markdown:451",
+    "LinkState": "imgui_markdown:452",
+    "MarkdownConfig": "imgui_markdown:321",
+    "MarkdownFormatInfo": "imgui_markdown:280",
+    "MarkdownFormatType": "imgui_markdown:271",
+    "MarkdownHeadingFormat": "imgui_markdown:310",
     "MarkdownImageData": "imgui_markdown:258",
     "MarkdownLinkCallbackData": "imgui_markdown:242",
     "MarkdownTooltipCallbackData": "imgui_markdown:252",
-    "TextBlock": "imgui_markdown:426",
-    "TextRegion": "imgui_markdown:345"
+    "TextBlock": "imgui_markdown:442",
+    "TextRegion": "imgui_markdown:349"
   },
   "structs": {
     "Emphasis": [
@@ -215,12 +215,24 @@
       {
         "name": "config",
         "type": "const MarkdownConfig*"
+      },
+      {
+        "name": "text",
+        "type": "const char*"
+      },
+      {
+        "name": "textLength",
+        "type": "int32_t"
       }
     ],
     "MarkdownHeadingFormat": [
       {
         "name": "font",
         "type": "ImFont*"
+      },
+      {
+        "name": "fontSize",
+        "type": "float"
       },
       {
         "name": "separator",
@@ -258,6 +270,10 @@
       },
       {
         "name": "border_col",
+        "type": "ImVec4"
+      },
+      {
+        "name": "bg_col",
         "type": "ImVec4"
       }
     ],
