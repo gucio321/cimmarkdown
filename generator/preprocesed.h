@@ -65,8 +65,8 @@ namespace ImGui
     struct MarkdownHeadingFormat
     {
         ImFont* font;
-        float fontSize;
         bool separator;
+        float fontSize = 0.0f;
     };
     struct MarkdownConfig
     {
@@ -640,11 +640,8 @@ namespace ImGui
        {
         if( fmt.font )
         {
-         ImGui::PushFont( fmt.font);
+             ImGui::PushFont( fmt.font, 0.0f );
         }
-                                    if (fmt.fontSize > 0.0f) {
-                                        ImGui::PushFont(                                                         ((void *)0)                                                            , fmt.fontSize );
-                                    }
        }
                 else
        {
@@ -652,9 +649,6 @@ namespace ImGui
         {
          ImGui::PopFont();
         }
-                                    if (fmt.fontSize > 0.0f) {
-                                        ImGui::PopFont();
-                                    }
        }
             }
             break;
@@ -674,11 +668,7 @@ namespace ImGui
             {
                 if( fmt.font )
                 {
-                    ImGui::PushFont( fmt.font );
-                }
-                if( fmt.fontSize > 0.0f )
-                {
-                    ImGui::PushFont(                                     ((void *)0)                                        , fmt.fontSize );
+                        ImGui::PushFont( fmt.font, fmt.fontSize > 0.0f ? fmt.fontSize : fmt.font->LegacySize );
                 }
                 ImGui::NewLine();
             }
@@ -694,10 +684,6 @@ namespace ImGui
                     ImGui::NewLine();
                 }
                 if( fmt.font )
-                {
-                    ImGui::PopFont();
-                }
-                if( fmt.fontSize > 0.0f )
                 {
                     ImGui::PopFont();
                 }
